@@ -70,5 +70,39 @@ Se diseñaron e implementaron dos flujos desacoplados para validar el sistema:
    npm run start:dev
    ```
 
-## 🛠️ Tecnología
+## � 4. Modos de Ejecución: Local vs Cloud
+
+El sistema de eventos soporta **dos modos de ejecución** sin cambios de código, solo por configuración de entorno:
+
+| Variable | Vacía → Local | Configurada → Cloud |
+|---|---|---|
+| `AWS_SNS_TOPIC_ARN` | `EventEmitter` (NestJS) | Amazon SNS |
+| `AWS_SQS_QUEUE_URL` | `EventEmitter` (NestJS) | Amazon SQS |
+
+### 🏠 Modo Local (por defecto)
+Si las variables de AWS quedan vacías en el `.env`, el sistema usa el **`EventEmitter` nativo de NestJS** como bus de eventos. Los flujos de dominio (`ProductCreatedEvent` → inicialización de inventario) funcionan exactamente igual, pero todo se resuelve en memoria dentro del mismo proceso.
+
+```env
+# .env — Modo local (sin infraestructura AWS)
+AWS_SNS_TOPIC_ARN=
+AWS_SQS_QUEUE_URL=
+```
+
+> **No se necesita ninguna cuenta ni servicio de AWS para probar el proyecto.**
+
+### ☁️ Modo Cloud (producción)
+Para un entorno distribuido, se configuran los ARNs reales y el sistema publica/consume eventos vía **SNS/SQS**, habilitando la comunicación asíncrona entre servicios independientes.
+
+```env
+# .env — Modo cloud
+AWS_REGION=us-east-1
+AWS_SNS_TOPIC_ARN=arn:aws:sns:us-east-1:123456789:product-events
+AWS_SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/123456789/inventory-queue
+```
+
+Esta decisión de diseño permite **evaluar toda la arquitectura event-driven localmente** y migrar a infraestructura real con un cambio de configuración.
+
+---
+
+## �🛠️ Tecnología
 - Nest.js v11 | TypeScript 5 | PostgreSQL | TypeORM
