@@ -1,10 +1,10 @@
-# NestJS Ecommerce - Hexagonal Architecture Challenge
+# NestJS Ecommerce
 
 ## 🏗️ Comparación Arquitectónica: ¿Por qué Hexagonal Modular?
 
 Para este desafío, se optó por una **Arquitectura Hexagonal Modular por Dominios** en lugar de una arquitectura plana o tradicional. A continuación, la justificación técnica de esta decisión:
 
-### 🏆 La elección: Modular Hexagonal (Opción A)
+### 🏆 La elección: Modular Hexagonal
 ```text
 modules/
   catalog/
@@ -35,7 +35,7 @@ La arquitectura plana es ideal para MVPs o productos pequeños. La **Modular Hex
 
 ---
 
-## 🔍 1. Diagnóstico Inicial (Challenge Point 2)
+## 🔍 1. Diagnóstico Inicial 
 
 Al analizar el repositorio original, se detectaron y corrigieron los siguientes puntos críticos:
 
@@ -43,7 +43,7 @@ Al analizar el repositorio original, se detectaron y corrigieron los siguientes 
 - **Acoplamiento Directo**: El catálogo llamaba directamente al servicio de inventario. Se rompió esta dependencia migrando a un bus de eventos local.
 - **Inconsistencia de Capas**: DTOs y lógica de persistencia estaban mezclados en servicios planos. Se separaron en puertos (interfaces) y adaptadores (TypeORM).
 
-## ⚡ 2. Alcance Backend: Eventos de Dominio (Challenge Point 3)
+## ⚡ 2. Alcance Backend: Eventos de Dominio
 
 Se diseñaron e implementaron dos flujos desacoplados para validar el sistema:
 
