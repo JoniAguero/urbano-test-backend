@@ -1,12 +1,37 @@
 version: '3.8'
 services:
   postgres:
-    image: postgres
+    image: postgres:15
     environment:
       POSTGRES_USER: hassan
       POSTGRES_PASSWORD: password
+      POSTGRES_DB: ecommercedb
     volumes:
       - ./database-data:/var/lib/postgresql/data/
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - 5432:5432
+      - 5433:5432
+
+  backend:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ecommercedb
+      DATABASE_USER: hassan
+      DATABASE_PASSWORD: password
+      JWT_SECRET: dev-secret-change-in-production
+      AWS_SNS_TOPIC_ARN: ''
+      AWS_SQS_QUEUE_URL: ''
+    depends_on:
+      - postgres
+
+  localstack:
+    image: localstack/localstack:3
+    ports:
+      - 4566:4566
+    environment:
+      SERVICES: sns,sqs
+      DEFAULT_REGION: us-east-1

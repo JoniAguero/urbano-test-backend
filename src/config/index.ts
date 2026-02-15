@@ -24,4 +24,9 @@ export const configuration = () => ({
     email: process.env.ADMIN_EMAIL || 'admin@admin.com',
     password: process.env.ADMIN_PASSWORD || '12345678',
   },
+  aws: {
+    region: process.env.AWS_REGION || 'us-east-1',
+    snsTopicArn: process.env.AWS_SNS_TOPIC_ARN || '',
+    sqsQueueUrl: process.env.AWS_SQS_QUEUE_URL || '',
+  },
 });
