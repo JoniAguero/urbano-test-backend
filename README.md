@@ -1,10 +1,5 @@
 # NestJS Ecommerce - Hexagonal Architecture Challenge
 
-> [!WARNING]
-> **Aviso de Madurez del Proyecto**: Esta aplicación no está lista para producción. Contiene errores de diseño, arquitectura e implementación heredados del repositorio original. Parte del desafío ha sido identificar, corregir y justificar estos problemas para permitir la evolución del sistema hacia un modelo robusto y escalable.
-
----
-
 ## 🏗️ Comparación Arquitectónica: ¿Por qué Hexagonal Modular?
 
 Para este desafío, se optó por una **Arquitectura Hexagonal Modular por Dominios** en lugar de una arquitectura plana o tradicional. A continuación, la justificación técnica de esta decisión:
@@ -33,7 +28,7 @@ En una arquitectura plana, los eventos se mezclan (`product-created`, `stock-upd
 Esto proporciona una **claridad conceptual absoluta**.
 
 ### 🧠 Razón #3 — Escalabilidad y Deploy futuro
-Esta estructura permite extraer componentes a servicios independientes (`apps/catalog-service`, `apps/inventory-service`) con un refactor mínimo. Detectar esto es una señal de un perfil **Senior**.
+Esta estructura permite extraer componentes a servicios independientes (`apps/catalog-service`, `apps/inventory-service`) con un refactor mínimo.
 
 ### 🧠 Razón #4 — Narrativa de Sistemas Complejos
 La arquitectura plana es ideal para MVPs o productos pequeños. La **Modular Hexagonal** es la arquitectura de elección para sistemas complejos reales, demostrando mayor capacidad de abstracción y diseño.
@@ -74,14 +69,6 @@ Se diseñaron e implementaron dos flujos desacoplados para validar el sistema:
    npm run seed:run
    npm run start:dev
    ```
-
----
-
-## 🚀 Próximos Pasos (Scope Frontend)
-- [ ] Implementar App React para consumir el flujo de eventos.
-- [ ] Deploy en Cloud (Railway/Vercel).
-
----
 
 ## 🛠️ Tecnología
 - Nest.js v11 | TypeScript 5 | PostgreSQL | TypeORM
