@@ -9,7 +9,7 @@ import {
 import {
   ProductDetails,
   ProductDetailsTypeFn,
-} from 'src/api/product/dto/productDetails';
+} from 'src/modules/catalog/domain/dto/product-details';
 import {
   Entity,
   Column,
