@@ -74,10 +74,10 @@ Se diseñaron e implementaron dos flujos desacoplados para validar el sistema:
 
 | Campo | Valor |
 |---|---|
-| Email | [EMAIL_ADDRESS] |
+| Email | [admin@admin.com] |
 | Password | 12345678 |
 
-##  4. Modos de Ejecución: Local vs Cloud
+## � 4. Modos de Ejecución: Local vs Cloud
 
 El sistema de eventos soporta **dos modos de ejecución** sin cambios de código, solo por configuración de entorno:
 
