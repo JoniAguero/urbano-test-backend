@@ -77,7 +77,7 @@ Se diseñaron e implementaron dos flujos desacoplados para validar el sistema:
 | Email | [admin@admin.com] |
 | Password | 12345678 |
 
-## � 4. Modos de Ejecución: Local vs Cloud
+## 🔄 4. Modos de Ejecución: Local vs Cloud
 
 El sistema de eventos soporta **dos modos de ejecución** sin cambios de código, solo por configuración de entorno:
 
@@ -111,5 +111,39 @@ Esta decisión de diseño permite **evaluar toda la arquitectura event-driven lo
 
 ---
 
-## �🛠️ Tecnología
+## 🚀 5. Deploy en Railway
+
+El proyecto incluye un **Dockerfile multi-stage** que Railway detecta automáticamente. Al iniciar, ejecuta migraciones y luego arranca la aplicación (`npm run start:prod:full`).
+
+### Pasos
+
+1. Crear un proyecto en [railway.app](https://railway.app)
+2. Agregar un servicio **PostgreSQL** (un click)
+3. Conectar el repositorio de GitHub como servicio
+4. Configurar las variables de entorno:
+
+| Variable | Valor |
+|---|---|
+| `PORT` | `3000` |
+| `BASE_URL` | `https://tu-app.up.railway.app` |
+| `DATABASE_HOST` | `${{Postgres.PGHOST}}` |
+| `DATABASE_PORT` | `${{Postgres.PGPORT}}` |
+| `DATABASE_NAME` | `${{Postgres.PGDATABASE}}` |
+| `DATABASE_USER` | `${{Postgres.PGUSER}}` |
+| `DATABASE_PASSWORD` | `${{Postgres.PGPASSWORD}}` |
+| `JWT_SECRET` | Un secret seguro |
+| `ADMIN_EMAIL` | `admin@admin.com` |
+| `ADMIN_PASSWORD` | Un password seguro |
+| `NODE_ENV` | `production` |
+| `AWS_SNS_TOPIC_ARN` | *(vacío — usa EventEmitter local)* |
+| `AWS_SQS_QUEUE_URL` | *(vacío)* |
+
+> Las variables `${{Postgres.XXX}}` son referencias internas de Railway al servicio de Postgres. Se autocompletan.
+
+5. El primer deploy ejecuta las migraciones automáticamente. Para el seed, usar el botón "Run Command" de Railway: `npm run seed:run`
+
+---
+
+## 🛠️ Tecnología
 - Nest.js v11 | TypeScript 5 | PostgreSQL | TypeORM
+

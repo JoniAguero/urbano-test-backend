@@ -13,6 +13,8 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "start:prod:full": "npm run start:migrate && npm run start:prod",
+    "start:migrate": "npx typeorm migration:run -d dist/database/migration/datasource.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest --forceExit --detectOpenHandles --verbose",
     "test:watch": "jest --watch",

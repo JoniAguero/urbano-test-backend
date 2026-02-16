@@ -1,5 +1,5 @@
 # ---- Build stage ----
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --legacy-peer-deps
@@ -7,10 +7,10 @@ COPY . .
 RUN npx nest build
 
 # ---- Production stage ----
-FROM node:18-alpine
+FROM node:20-alpine
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production --legacy-peer-deps
 COPY --from=builder /app/dist ./dist
 EXPOSE 3000
-CMD ["node", "dist/main"]
+CMD ["npm", "run", "start:prod:full"]
