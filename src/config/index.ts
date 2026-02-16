@@ -4,7 +4,7 @@ import { resolve } from 'path';
 
 const envFilePath: string = getEnvPath(resolve(__dirname, '..', 'common/envs'));
 
-config({ path: envFilePath });
+config({ path: envFilePath, override: false });
 
 export const configuration = () => ({
   port: parseInt(process.env.PORT, 10) || 3000,

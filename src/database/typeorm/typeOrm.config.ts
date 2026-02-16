@@ -10,7 +10,7 @@ const possiblePaths = [
   resolve(__dirname, '../../..', 'src/common/envs/development.env'),
 ];
 const envFilePath = possiblePaths.find((p) => existsSync(p)) || possiblePaths[0];
-config({ path: envFilePath });
+config({ path: envFilePath, override: false });
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
