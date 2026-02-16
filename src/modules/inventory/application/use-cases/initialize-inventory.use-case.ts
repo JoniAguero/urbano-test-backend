@@ -12,9 +12,7 @@ export class InitializeInventoryUseCase {
     ) { }
 
     async execute(productVariationId: number, countryCode = 'ARG') {
-        this.logger.log(
-            `Initializing inventory for productVariation=${productVariationId}`,
-        );
+        console.log(`[InitializeInventoryUseCase] Initializing inventory for productVariation=${productVariationId} in country=${countryCode}`);
         return this.inventoryRepo.createForProduct(productVariationId, countryCode, 0);
     }
 }

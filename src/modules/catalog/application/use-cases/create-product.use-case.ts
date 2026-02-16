@@ -34,6 +34,8 @@ export class CreateProductUseCase {
             sizeCode: 'NA',
         });
 
+        console.log(`[CreateProductUseCase] Product created: ${product.id}, Variation created: ${variation.id}`);
+
         await this.eventBus.publish(
             new ProductCreatedEvent(
                 product.id,
@@ -43,6 +45,8 @@ export class CreateProductUseCase {
                 merchantId,
             ),
         );
+
+        console.log(`[CreateProductUseCase] Event product.created published for product ${product.id}`);
 
         return product;
     }

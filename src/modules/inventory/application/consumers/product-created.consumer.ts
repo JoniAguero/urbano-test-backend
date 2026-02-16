@@ -13,12 +13,14 @@ export class ProductCreatedConsumer {
 
     @OnEvent('product.created')
     async handle(event: ProductCreatedEvent) {
+        console.log(`[ProductCreatedConsumer] Received product.created event:`, JSON.stringify(event));
         this.logger.log(
             `Consuming product.created event for variation=${event.productVariationId} (product=${event.productId}, ${event.title})`,
         );
 
         try {
             await this.initializeInventory.execute(event.productVariationId);
+            console.log(`[ProductCreatedConsumer] Inventory initialized successfully for variation ${event.productVariationId}`);
             this.logger.log(
                 `Inventory initialized for variation=${event.productVariationId}`,
             );
