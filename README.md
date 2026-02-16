@@ -126,11 +126,7 @@ El proyecto incluye un **Dockerfile multi-stage** que Railway detecta automátic
 |---|---|
 | `PORT` | `3000` |
 | `BASE_URL` | `https://tu-app.up.railway.app` |
-| `DATABASE_HOST` | `${{Postgres.PGHOST}}` |
-| `DATABASE_PORT` | `${{Postgres.PGPORT}}` |
-| `DATABASE_NAME` | `${{Postgres.PGDATABASE}}` |
-| `DATABASE_USER` | `${{Postgres.PGUSER}}` |
-| `DATABASE_PASSWORD` | `${{Postgres.PGPASSWORD}}` |
+| `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` |
 | `JWT_SECRET` | Un secret seguro |
 | `ADMIN_EMAIL` | `admin@admin.com` |
 | `ADMIN_PASSWORD` | Un password seguro |
@@ -138,7 +134,7 @@ El proyecto incluye un **Dockerfile multi-stage** que Railway detecta automátic
 | `AWS_SNS_TOPIC_ARN` | *(vacío — usa EventEmitter local)* |
 | `AWS_SQS_QUEUE_URL` | *(vacío)* |
 
-> Las variables `${{Postgres.XXX}}` son referencias internas de Railway al servicio de Postgres. Se autocompletan.
+> La variable `${{Postgres.DATABASE_URL}}` es una referencia interna de Railway al servicio de Postgres. Se autocompleta.
 
 5. El primer deploy ejecuta las migraciones automáticamente. Para el seed, usar el botón "Run Command" de Railway: `npm run seed:run`
 
